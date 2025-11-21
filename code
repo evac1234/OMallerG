@@ -1,0 +1,1301 @@
+// --- INITIAL SETUP ---
+hideElement("errorLabel");
+var usernameList = [""];
+var passList = [""];
+var allergenList = [];
+var fullAllergenList = [];
+var currentUsername;
+var nutsCount = 0;
+var dairyCount = 0;
+var glutenCount = 0;
+var shellfishCount = 0;
+var sesameCount = 0;
+var eggsCount = 0;
+var veganCount = 0;
+var vegetarianCount = 0;
+var otherCount = 0;
+var favList = [""];
+
+// --- RESTAURANT DATA ---
+var restaurantList = [
+  "Portillo’s", "Lou Malnati’s Pizzeria", "Uno Pizzeria & Grill",
+ "Raising Cane’s", "Billy Goat Tavern", "Maggiano’s Little Italy", 
+ "Bar Siena", "Small Cheval", "Brown’s Chicken & Pasta",
+  "Sushi Kush Too", "The Wiener’s Circle", "Pizzeria Portofino", "Del Seoul",
+  "Frances Brunchery", "Brunch Cafe", "Lolo's Bowls", "Summer House Santa Monica"
+];
+
+var restaurantListNames = [
+  "portillos", "louMalnatis", "uno",
+ "canes", "billyGoat", "maggianos", 
+ "barSiena", "smallCheval", "browns",
+  "sushiKushi", "wienerCircle", "pizzeriaPortofino", "delSeoul",
+  "francesBrunchery", "brunchCafe", "lolos", "summerHouse"
+];
+
+var restaurantScreenList = [
+  "portillosMenu", "louMalnatisMenu", "unoMenu", "canesMenu", "billyGoatMenu", 
+  "maggianosMenu", "barSienaMenu", "smallChevalMenu", "brownsMenu", 
+  "sushiKushiMenu", "wienerCircleMenu", "pizzeriaPortofinoMenu",
+  "delSeoulMenu", "francesBruncheryMenu", "brunchCafeMenu", 
+  "lolosMenu", "summerHouseMenu"
+];
+
+// --- PORTILLO’S MENU ---
+var portillosMenu = [
+  "Cheese Fries", "Italian Beef Sandwich", "Chicago-Style Hot Dog", "Chopped Salad",
+  "Chocolate Cake Shake", "Garden Dog (Vegetarian)", "Gluten-Free Grilled Chicken Sandwich",
+  "Strawberry Shortcake"
+];
+
+var portillosMenuItem0 = ["cheese", "potatoes", "beef tallow", "vegetable oil", "salt"];
+var portillosMenuItem1 = ["beef", "salt", "garlic", "bread", "gravy"];
+var portillosMenuItem2 = ["beef", "bun", "poppyseeds", "mustard", "pickle", "tomato"];
+var portillosMenuItem3 = ["romaine", "red cabbage", "tomatoes", "bacon", "garlic", "olive oil", "vinegar"];
+var portillosMenuItem4 = ["ice cream", "chocolate", "cake", "milk", "ice"];
+var portillosMenuItem5 = ["meatless hot dog", "bun", "mustard", "tomato", "pickle"];
+var portillosMenuItem6 = ["chicken", "gluten-free bun", "lettuce", "tomato", "mayonnaise"];
+var portillosMenuItem7 = ["cake", "strawberries", "sugar", "whipped cream", "eggs", "butter"];
+
+var portillosMenuItems = [
+  portillosMenuItem0, portillosMenuItem1, portillosMenuItem2, portillosMenuItem3,
+  portillosMenuItem4, portillosMenuItem5, portillosMenuItem6, portillosMenuItem7
+];
+// --- LOU MALNATI’S MENU ---
+var louMalnatisMenu = [
+  "Deep Dish Cheese Pizza",	"Sausage Deep Dish",	"Malnati Salad",	
+  "Thin Crust Pizza",	"Spaghetti Marinara",	"Garlic Bread",	
+  "Chocolate Chip Pizza",	"Tiramisu"		
+];
+
+var louMalnatisMenuItem0 = ["flour", "cheese", "butter", "tomatoes", "salt","sugar","garlic"];
+var louMalnatisMenuItem1 = ["flour", "cheese", "butter", "tomatoes", "salt","sugar","garlic", "sausage"];
+var louMalnatisMenuItem2 = ["romaine", "tomatoes", "olives","cheese","salami ", "sugar", "mustard", "garlic", "salt", "vinegar"];
+var louMalnatisMenuItem3 = ["flour", "cheese", "butter", "tomatoes", "salt","sugar","garlic"];
+var louMalnatisMenuItem4 = ["pasta", "tomatoes", "olive oil", "garlic", "onion", "basil","cheese"];
+var louMalnatisMenuItem5 = ["bread", "butter", "cheese", "garlic"];
+var louMalnatisMenuItem6 = ["flour","butter", "sugar", "eggs", "vanilla", "chocolate", "ice cream"];
+var louMalnatisMenuItem7 = ["cookies", "chocolate","eggs","coffee","cream"];
+
+var louMalnatisMenuItems = [
+  louMalnatisMenuItem0, louMalnatisMenuItem1, louMalnatisMenuItem2, louMalnatisMenuItem3,
+  louMalnatisMenuItem4, louMalnatisMenuItem5, louMalnatisMenuItem6, louMalnatisMenuItem7
+];
+
+// --- UNO PIZZERIA & GRILL MENU ---
+var unosGrillMenu = [
+  "Deep Dish Pepperoni Pizza", "Mozzarella Sticks", "Rattlesnake Pasta",
+  "Caesar Salad", "BBQ Chicken Pizza", "Chicken Wings",
+  "Brownie Sundae", "Spinach Dip"
+];
+
+var unosGrillMenuItem0 = ["flour", "tomatoes", "olive oil", "garlic", "salt", "sugar", "cheese", "butter", "beef", "pork"];
+var unosGrillMenuItem1 = ["mozzarella cheese", "flour", "breadcrumbs", "eggs", "buttermilk", "garlic powder", "salt", "oil", "tomatoes", "basil"];
+var unosGrillMenuItem2 = ["pasta", "chicken", "cream", "butter", "cheese", "garlic", "jalapeños", "bell pepper", "parsley", "seasoning"];
+var unosGrillMenuItem3 = ["romaine", "cheese", "bread", "garlic", "anchovy", "olive oil", "egg", "mustard", "vinegar", "pepper"];
+var unosGrillMenuItem4 = ["flour", "chicken", "cheese", "BBQ sauce", "tomatoes", "onions", "olive oil", "yeast", "salt", "cilantro"];
+var unosGrillMenuItem5 = ["chicken", "oil", "salt", "pepper", "vinegar", "butter", "hot sauce", "garlic", "ranch", "celery"];
+var unosGrillMenuItem6 = ["flour", "chocolate", "sugar", "butter", "eggs", "vanilla", "ice cream", "whipped cream", "nuts", "cherry"];
+var unosGrillMenuItem7 = ["spinach", "cream cheese", "sour cream", "mayonnaise", "garlic", "cheese", "artichoke", "salt", "pepper", "bread"];
+
+var unosGrillMenuItems = [
+  unosGrillMenuItem0, unosGrillMenuItem1, unosGrillMenuItem2, unosGrillMenuItem3,
+  unosGrillMenuItem4, unosGrillMenuItem5, unosGrillMenuItem6, unosGrillMenuItem7
+];
+
+// --- RAISING CANE’S MENU ---
+var raisingCanesMenu = [
+  "Chicken Fingers", "Cane’s Sauce", "Texas Toast", "Coleslaw",
+  "Crinkle-Cut Fries", "Chicken Sandwich", "Lemonade", "Sweet Tea"
+];
+
+var raisingCanesMenuItem0 = ["chicken", "flour", "oil", "salt", "pepper", "buttermilk"];
+var raisingCanesMenuItem1 = ["ketchup", "mayonnaise", "garlic powder", "pepper", "salt", "Worcestershire sauce"];
+var raisingCanesMenuItem2 = ["bread", "butter", "garlic", "parsley"];
+var raisingCanesMenuItem3 = ["cabbage", "carrot", "mayonnaise", "vinegar", "sugar", "pepper"];
+var raisingCanesMenuItem4 = ["potatoes", "oil", "salt"];
+var raisingCanesMenuItem5 = ["chicken", "bun", "lettuce", "tomato", "mayonnaise", "pickle"];
+var raisingCanesMenuItem6 = ["water", "sugar", "lemon"];
+var raisingCanesMenuItem7 = ["tea", "sugar", "water"];
+
+var raisingCanesMenuItems = [
+  raisingCanesMenuItem0, raisingCanesMenuItem1, raisingCanesMenuItem2, raisingCanesMenuItem3,
+  raisingCanesMenuItem4, raisingCanesMenuItem5, raisingCanesMenuItem6, raisingCanesMenuItem7
+];
+
+// --- BILLY GOAT TAVERN MENU ---
+var billyGoatMenu = [
+  "Cheezborger", "Double Cheezborger 'The Best'", "Grilled Cheese",
+  "Ham & Egg Sandwich", "Tuna Salad Sandwich", "Fries",
+  "Chili", "Hamborger"
+];
+
+var billyGoatMenuItem0 = ["beef", "cheese", "bun", "butter"];
+var billyGoatMenuItem1 = ["beef", "cheese", "bun", "butter"];
+var billyGoatMenuItem2 = ["bread", "cheese", "butter"];
+var billyGoatMenuItem3 = ["ham", "egg", "bread", "butter"];
+var billyGoatMenuItem4 = ["tuna", "bread", "mayonnaise", "celery", "onion"];
+var billyGoatMenuItem5 = ["potatoes", "oil", "salt"];
+var billyGoatMenuItem6 = ["beef", "beans", "cheese", "tomatoes", "spices"];
+var billyGoatMenuItem7 = ["beef", "bun", "salt", "pepper"];
+
+var billyGoatMenuItems = [
+  billyGoatMenuItem0, billyGoatMenuItem1, billyGoatMenuItem2, billyGoatMenuItem3,
+  billyGoatMenuItem4, billyGoatMenuItem5, billyGoatMenuItem6, billyGoatMenuItem7
+];
+
+// --- MAGGIANO’S LITTLE ITALY MENU ---
+var maggianosMenu = [
+  "Spaghetti & Meatballs", "Chicken Parmesan", "Fettuccine Alfredo",
+  "Caesar Salad", "Baked Ziti", "Calamari",
+  "Tiramisu", "Garlic Bread"
+];
+
+var maggianosMenuItem0 = ["pasta", "beef", "cheese", "butter", "tomato sauce", "garlic"];
+var maggianosMenuItem1 = ["chicken", "cheese", "flour", "butter", "tomato sauce", "breadcrumbs"];
+var maggianosMenuItem2 = ["pasta", "cheese", "butter", "milk", "cream", "garlic"];
+var maggianosMenuItem3 = ["romaine", "cheese", "bread", "garlic", "olive oil", "anchovy", "egg"];
+var maggianosMenuItem4 = ["pasta", "cheese", "butter", "tomato sauce", "beef"];
+var maggianosMenuItem5 = ["squid", "flour", "oil", "salt", "lemon"];
+var maggianosMenuItem6 = ["cake", "milk", "chocolate", "coffee", "custard", "cream"];
+var maggianosMenuItem7 = ["bread", "butter", "cheese", "garlic", "parsley"];
+
+var maggianosMenuItems = [
+  maggianosMenuItem0, maggianosMenuItem1, maggianosMenuItem2, maggianosMenuItem3,
+  maggianosMenuItem4, maggianosMenuItem5, maggianosMenuItem6, maggianosMenuItem7
+];
+
+var barSienaMenu = [
+  "Burrata", "Ricotta Gnocchi", "Prosciutto Pizza",
+  "Truffle Fries", "Short Rib Ragu", "Caesar Salad",
+  "Gelato", "Meatballs"
+];
+
+var barSienaMenuItem0 = ["cheese", "bread", "butter", "olive oil", "tomatoes", "basil"];
+var barSienaMenuItem1 = ["pasta", "ricotta cheese", "butter", "flour", "egg", "salt"];
+var barSienaMenuItem2 = ["flour", "cheese", "pork", "butter", "olive oil", "tomatoes"];
+var barSienaMenuItem3 = ["potatoes", "cheese", "oil", "salt", "truffle", "parsley"];
+var barSienaMenuItem4 = ["beef", "pasta", "butter", "tomatoes", "garlic", "wine", "herbs"];
+var barSienaMenuItem5 = ["romaine", "cheese", "bread", "olive oil", "garlic", "dressing"];
+var barSienaMenuItem6 = ["milk", "sugar", "ice cream"];
+var barSienaMenuItem7 = ["beef", "pork", "cheese", "butter", "breadcrumbs", "tomato sauce"];
+
+var barSienaMenuItems = [
+  barSienaMenuItem0, barSienaMenuItem1, barSienaMenuItem2, barSienaMenuItem3,
+  barSienaMenuItem4, barSienaMenuItem5, barSienaMenuItem6, barSienaMenuItem7
+];
+
+// --- SMALL CHEVAL MENU ---
+var smallChevalMenu = [
+  "Cheeseburger", "Double Cheeseburger", "Fries",
+  "Bacon Burger", "Veggie Burger", "Milkshake",
+  "Grilled Cheese", "Fried Chicken"
+];
+
+var smallChevalMenuItem0 = ["beef", "cheese", "bun", "butter", "pickles", "mustard"];
+var smallChevalMenuItem1 = ["beef", "cheese", "bun", "butter"];
+var smallChevalMenuItem2 = ["potatoes", "oil", "salt"];
+var smallChevalMenuItem3 = ["pork", "beef", "cheese", "bun", "butter"];
+var smallChevalMenuItem4 = ["veggie patty", "bread", "cheese", "bun", "lettuce"];
+var smallChevalMenuItem5 = ["ice cream", "milk", "sugar", "vanilla"];
+var smallChevalMenuItem6 = ["bread", "cheese", "butter"];
+var smallChevalMenuItem7 = ["flour", "chicken", "salt", "pepper", "oil"];
+
+var smallChevalMenuItems = [
+  smallChevalMenuItem0, smallChevalMenuItem1, smallChevalMenuItem2, smallChevalMenuItem3,
+  smallChevalMenuItem4, smallChevalMenuItem5, smallChevalMenuItem6, smallChevalMenuItem7
+];
+
+// --- BROWN’S CHICKEN & PASTA MENU ---
+var brownsMenu = [
+  "Fried Chicken", "Mashed Potatoes", "Corn on the Cob",
+  "Chicken Sandwich", "Coleslaw", "Macaroni & Cheese",
+  "Gravy", "Biscuit"
+];
+
+var brownsMenuItem0 = ["chicken", "flour", "butter", "salt", "pepper", "oil"];
+var brownsMenuItem1 = ["potatoes", "butter", "milk", "salt"];
+var brownsMenuItem2 = ["corn", "butter", "salt"];
+var brownsMenuItem3 = ["chicken", "bun", "cheese", "butter", "lettuce", "mayo"];
+var brownsMenuItem4 = ["cabbage", "carrot", "mayonnaise", "vinegar", "sugar"];
+var brownsMenuItem5 = ["pasta", "cheese", "milk", "butter"];
+var brownsMenuItem6 = ["butter", "flour", "oil", "salt"];
+var brownsMenuItem7 = ["flour", "butter", "milk", "baking powder"];
+
+var brownsMenuItems = [
+  brownsMenuItem0, brownsMenuItem1, brownsMenuItem2, brownsMenuItem3,
+  brownsMenuItem4, brownsMenuItem5, brownsMenuItem6, brownsMenuItem7
+];
+
+// --- SUSHI KUSHI TOO MENU ---
+var sushiKushiMenu = [
+  "California Roll", "Spicy Tuna Roll", "Miso Soup",
+  "Tempura Shrimp", "Edamame", "Salmon Nigiri",
+  "Udon Noodles", "Green Tea Ice Cream"
+];
+
+var sushiKushiMenuItem0 = ["crab", "rice", "avocado", "seaweed", "cucumber"];
+var sushiKushiMenuItem1 = ["fish", "soy sauce", "rice", "seaweed", "spicy mayo"];
+var sushiKushiMenuItem2 = ["soy sauce", "tofu", "seaweed", "green onion"];
+var sushiKushiMenuItem3 = ["shrimp", "flour", "butter", "oil", "egg"];
+var sushiKushiMenuItem4 = ["soybeans", "salt", "sesame"];
+var sushiKushiMenuItem5 = ["fish", "rice", "vinegar"];
+var sushiKushiMenuItem6 = ["pasta", "soy sauce", "mushrooms", "green onion"];
+var sushiKushiMenuItem7 = ["milk", "ice cream", "sugar", "green tea powder"];
+
+var sushiKushiMenuItems = [
+  sushiKushiMenuItem0, sushiKushiMenuItem1, sushiKushiMenuItem2, sushiKushiMenuItem3,
+  sushiKushiMenuItem4, sushiKushiMenuItem5, sushiKushiMenuItem6, sushiKushiMenuItem7
+];
+
+// --- THE WIENER’S CIRCLE MENU ---
+var wienersCircleMenu = [
+  "Char Dog", "Cheese Fries", "Burger",
+  "Polish Sausage", "Grilled Cheese", "Chocolate Shake",
+  "Chili Dog", "Root Beer"
+];
+
+var wienersCircleMenuItem0 = ["beef", "bun", "mustard", "poppyseeds", "tomato", "pickle"];
+var wienersCircleMenuItem1 = ["potatoes", "cheese", "butter", "salt"];
+var wienersCircleMenuItem2 = ["beef", "cheese", "bun", "butter"];
+var wienersCircleMenuItem3 = ["pork", "bun", "mustard", "onion"];
+var wienersCircleMenuItem4 = ["bread", "cheese", "butter"];
+var wienersCircleMenuItem5 = ["milk", "ice cream", "chocolate", "sugar"];
+var wienersCircleMenuItem6 = ["beef", "bun", "cheese", "mustard", "chili"];
+var wienersCircleMenuItem7 = ["sugar", "water", "root flavor"];
+
+var wienersCircleMenuItems = [
+  wienersCircleMenuItem0, wienersCircleMenuItem1, wienersCircleMenuItem2, wienersCircleMenuItem3,
+  wienersCircleMenuItem4, wienersCircleMenuItem5, wienersCircleMenuItem6, wienersCircleMenuItem7
+];
+
+// --- PIZZERIA PORTOFINO MENU ---
+var portofinoMenu = [
+  "Margherita Pizza", "Prosciutto Pizza", "Rigatoni Vodka",
+  "Seasonal Burrata", "Caesar Salad", "Breadsticks",
+  "Tiramisu", "Gelato"
+];
+
+var portofinoMenuItem0 = ["flour", "cheese", "tomatoes", "basil", "olive oil", "yeast", "salt"];
+var portofinoMenuItem1 = ["pork", "flour", "cheese", "olive oil", "basil"];
+var portofinoMenuItem2 = ["pasta", "butter", "milk", "cheese", "tomato sauce", "vodka", "garlic"];
+var portofinoMenuItem3 = ["cheese", "bread", "butter", "tomatoes", "basil"];
+var portofinoMenuItem4 = ["romaine", "cheese", "bread", "garlic", "anchovy"];
+var portofinoMenuItem5 = ["flour", "butter", "yeast", "salt"];
+var portofinoMenuItem6 = ["cake", "milk", "coffee", "chocolate", "cream"];
+var portofinoMenuItem7 = ["milk", "cream", "sugar", "vanilla"];
+
+var portofinoMenuItems = [
+  portofinoMenuItem0, portofinoMenuItem1, portofinoMenuItem2, portofinoMenuItem3,
+  portofinoMenuItem4, portofinoMenuItem5, portofinoMenuItem6, portofinoMenuItem7
+];
+
+
+// --- DEL SEOUL MENU ---
+var delSeoulMenu = [
+  "Korean BBQ Tacos", "Kimchi Fries", "Bibimbap",
+  "Bulgogi", "Shrimp Tacos", "Chicken Wings",
+  "Dumplings", "Miso Soup"
+];
+
+var delSeoulMenuItem0 = ["beef", "tortilla", "cheese", "butter", "soy sauce", "onion", "garlic", "sugar", "vinegar", "sesame"];
+var delSeoulMenuItem1 = ["potatoes", "cheese", "oil", "kimchi", "mayo", "onion"];
+var delSeoulMenuItem2 = ["beef", "egg", "rice", "soy sauce", "vegetables", "sesame oil", "garlic"];
+var delSeoulMenuItem3 = ["beef", "soy sauce", "sugar", "garlic", "pear juice", "sesame oil"];
+var delSeoulMenuItem4 = ["shrimp", "tortilla", "cheese", "lettuce", "mayo", "lime"];
+var delSeoulMenuItem5 = ["chicken", "oil", "salt", "pepper", "soy sauce", "garlic"];
+var delSeoulMenuItem6 = ["pork", "flour", "butter", "cabbage", "ginger", "soy sauce"];
+var delSeoulMenuItem7 = ["soy sauce", "tofu", "seaweed", "broth"];
+
+var delSeoulMenuItems = [
+  delSeoulMenuItem0, delSeoulMenuItem1, delSeoulMenuItem2, delSeoulMenuItem3,
+  delSeoulMenuItem4, delSeoulMenuItem5, delSeoulMenuItem6, delSeoulMenuItem7
+];
+
+
+// --- FRANCES BRUNCHERY MENU ---
+var francesMenu = [
+  "Avocado Toast", "Pancakes", "Eggs Benedict",
+  "French Toast", "Breakfast Burrito", "Omelette",
+  "Hash Browns", "Smoothie Bowl"
+];
+
+var francesMenuItem0 = ["bread", "butter", "egg", "avocado", "salt", "pepper", "olive oil"];
+var francesMenuItem1 = ["flour", "milk", "butter", "egg", "sugar", "baking powder", "vanilla"];
+var francesMenuItem2 = ["egg", "ham", "bread", "butter", "lemon", "vinegar", "hollandaise"];
+var francesMenuItem3 = ["bread", "egg", "milk", "butter", "sugar", "cinnamon"];
+var francesMenuItem4 = ["egg", "tortilla", "cheese", "butter", "potatoes", "salsa"];
+var francesMenuItem5 = ["egg", "cheese", "butter", "salt", "pepper", "milk"];
+var francesMenuItem6 = ["potatoes", "butter", "salt", "pepper", "oil"];
+var francesMenuItem7 = ["yogurt", "granola", "milk", "fruit", "honey", "banana"];
+
+var francesMenuItems = [
+  francesMenuItem0, francesMenuItem1, francesMenuItem2, francesMenuItem3,
+  francesMenuItem4, francesMenuItem5, francesMenuItem6, francesMenuItem7
+];
+
+// --- BRUNCH CAFE MENU ---
+var brunchCafeMenu = [
+  "Strawberry Crepes", "Breakfast Tacos", "Skillet",
+  "Waffles", "Avocado Toast", "Omelette",
+  "French Toast", "Pancakes"
+];
+
+var brunchCafeMenuItem0 = ["flour", "egg", "milk", "butter", "strawberry", "sugar", "cream"];
+var brunchCafeMenuItem1 = ["egg", "tortilla", "cheese", "butter", "potatoes", "salsa"];
+var brunchCafeMenuItem2 = ["potatoes", "egg", "cheese", "butter", "vegetables"];
+var brunchCafeMenuItem3 = ["flour", "egg", "milk", "butter", "sugar", "baking powder", "vanilla"];
+var brunchCafeMenuItem4 = ["bread", "butter", "egg", "avocado"];
+var brunchCafeMenuItem5 = ["egg", "cheese", "butter", "vegetables"];
+var brunchCafeMenuItem6 = ["bread", "egg", "milk", "butter", "sugar"];
+var brunchCafeMenuItem7 = ["flour", "egg", "milk", "butter", "sugar", "vanilla"];
+
+var brunchCafeMenuItems = [
+  brunchCafeMenuItem0, brunchCafeMenuItem1, brunchCafeMenuItem2, brunchCafeMenuItem3,
+  brunchCafeMenuItem4, brunchCafeMenuItem5, brunchCafeMenuItem6, brunchCafeMenuItem7
+];
+
+// --- LOLO’S BOWLS MENU ---
+var loloMenu = [
+  "Lolo's Bowl", "Berry Bowl", "Chocolate Bowl",
+  "Cali Bowl", "Hawaii Bowl", "Maui Smoothie",
+  "Sunrise Smoothie", "Protein Bowl"
+];
+
+var loloMenuItem0 = ["granola", "strawberry", "banana", "acai", "honey", "milk"];
+var loloMenuItem1 = ["berries", "granola", "yogurt", "honey"];
+var loloMenuItem2 = ["granola", "chocolate", "berries", "banana", "milk"];
+var loloMenuItem3 = ["granola", "berries", "nuts", "yogurt"];
+var loloMenuItem4 = ["granola"];
+var loloMenuItem5 = ["berries", "milk", "banana"];
+var loloMenuItem6 = ["yogurt", "honey", "fruit"];
+var loloMenuItem7 = ["granola", "nuts", "milk", "fruit"];
+
+var loloMenuItems = [
+  loloMenuItem0, loloMenuItem1, loloMenuItem2, loloMenuItem3,
+  loloMenuItem4, loloMenuItem5, loloMenuItem6, loloMenuItem7
+];
+
+// --- SUMMER HOUSE SANTA MONICA MENU ---
+var summerHouseMenu = [
+  "Fish Tacos", "Avocado Toast", "Caesar Salad",
+  "Burger", "Lobster Roll", "Spaghetti Pomodoro",
+  "Chocolate Chip Cookie", "Nutty Sundae"
+];
+
+var summerHouseMenuItem0 = ["fish", "tortilla", "cheese", "lime", "cabbage", "cilantro", "salsa", "cream", "salt", "pepper"];
+var summerHouseMenuItem1 = ["bread", "avocado", "egg", "butter", "salt", "pepper", "olive oil", "lemon", "herbs", "tomato"];
+var summerHouseMenuItem2 = ["romaine", "cheese", "croutons", "anchovy", "garlic", "egg", "olive oil", "mustard", "lemon", "pepper"];
+var summerHouseMenuItem3 = ["beef", "cheese", "bun", "butter", "lettuce", "tomato", "onion", "pickles", "salt", "pepper"];
+var summerHouseMenuItem4 = ["lobster", "bun", "butter", "mayo", "lemon", "celery", "salt", "pepper", "parsley", "lettuce"];
+var summerHouseMenuItem5 = ["pasta", "tomatoes", "olive oil", "garlic", "basil", "salt", "pepper", "cheese", "butter", "parsley"];
+var summerHouseMenuItem6 = ["flour", "chocolate", "butter", "egg", "sugar", "brown sugar", "vanilla", "baking soda", "salt", "milk"];
+var summerHouseMenuItem7 = ["ice cream", "nuts", "chocolate", "whipped cream", "caramel", "syrup", "cherry", "sugar", "milk", "butter"];
+
+var summerHouseMenuItems = [
+  summerHouseMenuItem0, summerHouseMenuItem1, summerHouseMenuItem2, summerHouseMenuItem3,
+  summerHouseMenuItem4, summerHouseMenuItem5, summerHouseMenuItem6, summerHouseMenuItem7
+];
+
+console.log("Setup complete");
+
+
+// --- DROPDOWN SETUP ---
+setProperty("chooseRestaurantDropdown", "options", restaurantList);
+
+// --- EVENT HANDLERS ---
+
+// Log out (from restaurant screens)
+onEvent("logOutRestaurant", "click", function() {
+  logOutFunction();
+});
+//Go Home (from all screens)
+onEvent("portillosHomeButton", "click", function() {
+  goHome();
+});
+onEvent("louMalnatisHomeButton", "click", function() {
+  goHome();
+});
+onEvent("unosHomeButton", "click", function() {
+  goHome();
+});
+onEvent("canesHomeButton", "click", function() {
+  goHome();
+});
+onEvent("billyGoatHomeButton", "click", function() {
+  goHome();
+});
+onEvent("maggianosHomeButton", "click", function() {
+  goHome();
+});
+onEvent("barSienaButton", "click", function() {
+  goHome();
+});
+onEvent("smallChevalHomeButton", "click", function() {
+  goHome();
+});
+onEvent("brownsHomeButton", "click", function() {
+  goHome();
+});
+onEvent("sushiKushiHomeButton", "click", function() {
+  goHome();
+});
+onEvent("weinerCircleButton", "click", function() {
+  goHome();
+});
+onEvent("pizzeriaPortofinoButton", "click", function() {
+  goHome();
+});
+onEvent("delSoulHomeButton", "click", function() {
+  goHome();
+});
+onEvent("francesHomeButton", "click", function() {
+  goHome();
+});
+onEvent("brunchCafeButton", "click", function() {
+  goHome();
+});
+onEvent("lolosHomeButton", "click", function() {
+  goHome();
+});
+onEvent("summerHouseHomeButton", "click", function() {
+  goHome();
+});
+onEvent("goHomeFav", "click", function() {
+  goHome();
+});
+
+//go to fav list 
+onEvent("button2", "click", function( ) {
+  setText("favListItems", "Favorite Items: "+favList);
+  setScreen("favScreen");
+});
+//check buttons 
+onEvent("portillosButton0", "click", function( ) {
+  addToFav("portillos", 0);
+});
+onEvent("portillosButton1", "click", function( ) {
+  addToFav("portillos", 1);
+});
+onEvent("portillosButton2", "click", function( ) {
+  addToFav("portillos", 2);
+});
+onEvent("portillosButton3", "click", function( ) {
+  addToFav("portillos", 3);
+});
+onEvent("portillosButton4", "click", function( ) {
+  addToFav("portillos", 4);
+});
+onEvent("portillosButton5", "click", function( ) {
+  addToFav("portillos", 5);
+});
+onEvent("portillosButton6", "click", function( ) {
+  addToFav("portillos", 6);
+});
+onEvent("portillosButton7", "click", function( ) {
+  addToFav("portillos", 7);
+});
+onEvent("louMalnatisButton0", "click", function( ) {
+  addToFav("louMalnatis", 0);
+});
+onEvent("louMalnatisButton1", "click", function( ) {
+  addToFav("louMalnatis", 1);
+});
+onEvent("louMalnatisButton2", "click", function( ) {
+  addToFav("louMalnatis", 2);
+});
+onEvent("louMalnatisButton3", "click", function( ) {
+  addToFav("louMalnatis", 3);
+});
+onEvent("louMalnatisButton4", "click", function( ) {
+  addToFav("louMalnatis", 4);
+});
+onEvent("louMalnatisButton5", "click", function( ) {
+  addToFav("louMalnatis", 5);
+});
+onEvent("louMalnatisButton6", "click", function( ) {
+  addToFav("louMalnatis", 6);
+});
+onEvent("louMalnatisButton7", "click", function( ) {
+  addToFav("louMalnatis", 7);
+});
+onEvent("barSienaButton0", "click", function( ) {
+  addToFav("barSiena", 0);
+});
+onEvent("barSienaButton1", "click", function( ) {
+  addToFav("barSiena", 1);
+});
+onEvent("barSienaButton2", "click", function( ) {
+  addToFav("barSiena", 2);
+});
+onEvent("barSienaButton3", "click", function( ) {
+  addToFav("barSiena", 3);
+});
+onEvent("barSiena", "click", function( ) {
+  addToFav("barSiena", 4);
+});
+onEvent("barSienaButton5", "click", function( ) {
+  addToFav("barSiena", 5);
+});
+onEvent("barSienaButton6", "click", function( ) {
+  addToFav("barSiena", 6);
+});
+onEvent("barSienaButton7", "click", function( ) {
+  addToFav("barSiena", 7);
+});
+onEvent("portofinoButton0", "click", function() {
+  addToFav("portofino", 0);
+});
+onEvent("portofinoButton1", "click", function() {
+  addToFav("portofino", 1);
+});
+onEvent("portofinoButton2", "click", function() {
+  addToFav("portofino", 2);
+});
+onEvent("portofinoButton3", "click", function() {
+  addToFav("portofino", 3);
+});
+onEvent("portofinoButton4", "click", function() {
+  addToFav("portofino", 4);
+});
+onEvent("portofinoButton5", "click", function() {
+  addToFav("portofino", 5);
+});
+onEvent("portofinoButton6", "click", function() {
+  addToFav("portofino", 6);
+});
+onEvent("portofinoButton7", "click", function() {
+  addToFav("portofino", 7);
+});
+onEvent("delSeoulButton0", "click", function() {
+  addToFav("delSeoul", 0);
+});
+onEvent("delSeoulButton1", "click", function() {
+  addToFav("delSeoul", 1);
+});
+onEvent("delSeoulButton2", "click", function() {
+  addToFav("delSeoul", 2);
+});
+onEvent("delSeoulButton3", "click", function() {
+  addToFav("delSeoul", 3);
+});
+onEvent("delSeoulButton4", "click", function() {
+  addToFav("delSeoul", 4);
+});
+onEvent("delSeoulButton5", "click", function() {
+  addToFav("delSeoul", 5);
+});
+onEvent("delSeoulButton6", "click", function() {
+  addToFav("delSeoul", 6);
+});
+onEvent("delSeoulButton7", "click", function() {
+  addToFav("delSeoul", 7);
+});
+onEvent("francesButton0", "click", function() {
+  addToFav("frances", 0);
+});
+onEvent("francesButton1", "click", function() {
+  addToFav("frances", 1);
+});
+onEvent("francesButton2", "click", function() {
+  addToFav("frances", 2);
+});
+onEvent("francesButton3", "click", function() {
+  addToFav("frances", 3);
+});
+onEvent("francesButton4", "click", function() {
+  addToFav("frances", 4);
+});
+onEvent("francesButton5", "click", function() {
+  addToFav("frances", 5);
+});
+onEvent("francesButton6", "click", function() {
+  addToFav("frances", 6);
+});
+onEvent("francesButton7", "click", function() {
+  addToFav("frances", 7);
+});
+onEvent("brunchCafeButton0", "click", function() {
+  addToFav("brunchCafe", 0);
+});
+onEvent("brunchCafeButton1", "click", function() {
+  addToFav("brunchCafe", 1);
+});
+onEvent("brunchCafeButton2", "click", function() {
+  addToFav("brunchCafe", 2);
+});
+onEvent("brunchCafeButton3", "click", function() {
+  addToFav("brunchCafe", 3);
+});
+onEvent("brunchCafeButton4", "click", function() {
+  addToFav("brunchCafe", 4);
+});
+onEvent("brunchCafeButton5", "click", function() {
+  addToFav("brunchCafe", 5);
+});
+onEvent("brunchCafeButton6", "click", function() {
+  addToFav("brunchCafe", 6);
+});
+onEvent("brunchCafeButton7", "click", function() {
+  addToFav("brunchCafe", 7);
+});
+onEvent("loloButton0", "click", function() {
+  addToFav("lolo", 0);
+});
+onEvent("loloButton1", "click", function() {
+  addToFav("lolo", 1);
+});
+onEvent("loloButton2", "click", function() {
+  addToFav("lolo", 2);
+});
+onEvent("loloButton3", "click", function() {
+  addToFav("lolo", 3);
+});
+onEvent("loloButton4", "click", function() {
+  addToFav("lolo", 4);
+});
+onEvent("loloButton5", "click", function() {
+  addToFav("lolo", 5);
+});
+onEvent("loloButton6", "click", function() {
+  addToFav("lolo", 6);
+});
+onEvent("loloButton7", "click", function() {
+  addToFav("lolo", 7);
+});
+onEvent("summerHouseButton0", "click", function() {
+  addToFav("summerHouse", 0);
+});
+onEvent("summerHouseButton1", "click", function() {
+  addToFav("summerHouse", 1);
+});
+onEvent("summerHouseButton2", "click", function() {
+  addToFav("summerHouse", 2);
+});
+onEvent("summerHouseButton3", "click", function() {
+  addToFav("summerHouse", 3);
+});
+onEvent("summerHouseButton4", "click", function() {
+  addToFav("summerHouse", 4);
+});
+onEvent("summerHouseButton5", "click", function() {
+  addToFav("summerHouse", 5);
+});
+onEvent("summerHouseButton6", "click", function() {
+  addToFav("summerHouse", 6);
+});
+onEvent("summerHouseButton7", "click", function() {
+  addToFav("summerHouse", 7);
+});
+onEvent("raisingCanesButton0", "click", function() {
+  addToFav("raisingCanes", 0);
+});
+onEvent("raisingCanesButton1", "click", function() {
+  addToFav("raisingCanes", 1);
+});
+onEvent("raisingCanesButton2", "click", function() {
+  addToFav("raisingCanes", 2);
+});
+onEvent("raisingCanesButton3", "click", function() {
+  addToFav("raisingCanes", 3);
+});
+onEvent("raisingCanesButton4", "click", function() {
+  addToFav("raisingCanes", 4);
+});
+onEvent("raisingCanesButton5", "click", function() {
+  addToFav("raisingCanes", 5);
+});
+onEvent("raisingCanesButton6", "click", function() {
+  addToFav("raisingCanes", 6);
+});
+onEvent("raisingCanesButton7", "click", function() {
+  addToFav("raisingCanes", 7);
+});
+onEvent("billyGoatButton0", "click", function() {
+  addToFav("billyGoat", 0);
+});
+onEvent("billyGoatButton1", "click", function() {
+  addToFav("billyGoat", 1);
+});
+onEvent("billyGoatButton2", "click", function() {
+  addToFav("billyGoat", 2);
+});
+onEvent("billyGoatButton3", "click", function() {
+  addToFav("billyGoat", 3);
+});
+onEvent("billyGoatButton4", "click", function() {
+  addToFav("billyGoat", 4);
+});
+onEvent("billyGoatButton5", "click", function() {
+  addToFav("billyGoat", 5);
+});
+onEvent("billyGoatButton6", "click", function() {
+  addToFav("billyGoat", 6);
+});
+onEvent("billyGoatButton7", "click", function() {
+  addToFav("billyGoat", 7);
+});
+onEvent("maggianosButton0", "click", function() {
+  addToFav("maggianos", 0);
+});
+onEvent("maggianosButton1", "click", function() {
+  addToFav("maggianos", 1);
+});
+onEvent("maggianosButton2", "click", function() {
+  addToFav("maggianos", 2);
+});
+onEvent("maggianosButton3", "click", function() {
+  addToFav("maggianos", 3);
+});
+onEvent("maggianosButton4", "click", function() {
+  addToFav("maggianos", 4);
+});
+onEvent("maggianosButton5", "click", function() {
+  addToFav("maggianos", 5);
+});
+onEvent("maggianosButton6", "click", function() {
+  addToFav("maggianos", 6);
+});
+onEvent("maggianosButton7", "click", function() {
+  addToFav("maggianos", 7);
+});
+onEvent("smallChevalButton0", "click", function() {
+  addToFav("smallCheval", 0);
+});
+onEvent("smallChevalButton1", "click", function() {
+  addToFav("smallCheval", 1);
+});
+onEvent("smallChevalButton2", "click", function() {
+  addToFav("smallCheval", 2);
+});
+onEvent("smallChevalButton3", "click", function() {
+  addToFav("smallCheval", 3);
+});
+onEvent("smallChevalButton4", "click", function() {
+  addToFav("smallCheval", 4);
+});
+onEvent("smallChevalButton5", "click", function() {
+  addToFav("smallCheval", 5);
+});
+onEvent("smallChevalButton6", "click", function() {
+  addToFav("smallCheval", 6);
+});
+onEvent("smallChevalButton7", "click", function() {
+  addToFav("smallCheval", 7);
+});
+onEvent("brownsButton0", "click", function() {
+  addToFav("browns", 0);
+});
+onEvent("brownsButton1", "click", function() {
+  addToFav("browns", 1);
+});
+onEvent("brownsButton2", "click", function() {
+  addToFav("browns", 2);
+});
+onEvent("brownsButton3", "click", function() {
+  addToFav("browns", 3);
+});
+onEvent("brownsButton4", "click", function() {
+  addToFav("browns", 4);
+});
+onEvent("brownsButton5", "click", function() {
+  addToFav("browns", 5);
+});
+onEvent("brownsButton6", "click", function() {
+  addToFav("browns", 6);
+});
+onEvent("brownsButton7", "click", function() {
+  addToFav("browns", 7);
+});
+onEvent("sushiKushiButton0", "click", function() {
+  addToFav("sushiKushi", 0);
+});
+onEvent("sushiKushiButton1", "click", function() {
+  addToFav("sushiKushi", 1);
+});
+onEvent("sushiKushiButton2", "click", function() {
+  addToFav("sushiKushi", 2);
+});
+onEvent("sushiKushiButton3", "click", function() {
+  addToFav("sushiKushi", 3);
+});
+onEvent("sushiKushiButton4", "click", function() {
+  addToFav("sushiKushi", 4);
+});
+onEvent("sushiKushiButton5", "click", function() {
+  addToFav("sushiKushi", 5);
+});
+onEvent("sushiKushiButton6", "click", function() {
+  addToFav("sushiKushi", 6);
+});
+onEvent("sushiKushiButton7", "click", function() {
+  addToFav("sushiKushi", 7);
+});
+onEvent("wienersCircleButton0", "click", function() {
+  addToFav("wienersCircle", 0);
+});
+onEvent("wienersCircleButton1", "click", function() {
+  addToFav("wienersCircle", 1);
+});
+onEvent("wienersCircleButton2", "click", function() {
+  addToFav("wienersCircle", 2);
+});
+onEvent("wienersCircleButton3", "click", function() {
+  addToFav("wienersCircle", 3);
+});
+onEvent("wienersCircleButton4", "click", function() {
+  addToFav("wienersCircle", 4);
+});
+onEvent("wienersCircleButton5", "click", function() {
+  addToFav("wienersCircle", 5);
+});
+onEvent("wienersCircleButton6", "click", function() {
+  addToFav("wienersCircle", 6);
+});
+onEvent("wienersCircleButton7", "click", function() {
+  addToFav("wienersCircle", 7);
+});
+
+// Go to menu screen
+onEvent("goToMenu", "click", function() {
+  var chosen = getText("chooseRestaurantDropdown");
+  var name = "";
+  var index = -1;
+  var menu = "";
+
+  for (var i = 0; i < restaurantList.length; i++) {
+    if (chosen == restaurantList[i]) {
+      index = i;
+    }
+  }
+
+  menu = restaurantScreenList[index];
+  name = restaurantListNames[index];
+  setScreen(menu);
+
+  if (chosen == "Portillo’s") {
+  var nameOfMenu = portillosMenu;
+  changeLabels(nameOfMenu, name);
+  filterForAllergy(portillosMenuItems, nameOfMenu, "portillosInput", name);
+} else if ((chosen == "Lou Malnati’s Pizzeria")) {
+  var nameOfMenu1 = louMalnatisMenu;
+  changeLabels(nameOfMenu1, name);
+  filterForAllergy(louMalnatisMenuItems, nameOfMenu1, "louMalnatisInput", name);
+} else if (chosen == "Uno Pizzeria & Grill") {
+  var nameOfMenu2 = unosGrillMenu;
+  changeLabels(nameOfMenu2, name);
+  filterForAllergy(unosGrillMenuItems, nameOfMenu2, "unosGrillInput", name);
+} else if (chosen == "Raising Cane’s") {
+  var nameOfMenu3 = raisingCanesMenu;
+  changeLabels(nameOfMenu3, name);
+  filterForAllergy(raisingCanesMenuItems, nameOfMenu3, "raisingCanesInput", name);
+} else if (chosen == "Billy Goat Tavern") {
+  var nameOfMenu4 = billyGoatMenu;
+  changeLabels(nameOfMenu4, name);
+  filterForAllergy(billyGoatMenuItems, nameOfMenu4, "billyGoatInput", name);
+} else if (chosen == "Maggiano’s Little Italy") {
+  var nameOfMenu5 = maggianosMenu;
+  changeLabels(nameOfMenu5, name);
+  filterForAllergy(maggianosMenuItems, nameOfMenu5, "maggianosInput", name);
+} else if (chosen == "Bar Siena") {
+  var nameOfMenu6 = barSienaMenu;
+  changeLabels(nameOfMenu6, name);
+  filterForAllergy(barSienaMenuItems, nameOfMenu6, "barSienaInput", name);
+} else if (chosen == "Small Cheval") {
+  var nameOfMenu7 = smallChevalMenu;
+  changeLabels(nameOfMenu7, name);
+  filterForAllergy(smallChevalMenuItems, nameOfMenu7, "smallChevalInput", name);
+} else if (chosen == "Brown’s Chicken & Pasta") {
+  var nameOfMenu8 = brownsMenu;
+  changeLabels(nameOfMenu8, name);
+  filterForAllergy(brownsMenuItems, nameOfMenu8, "brownsInput", name);
+} else if (chosen == "Sushi Kushi Too") {
+  var nameOfMenu9 = sushiKushiMenu;
+  changeLabels(nameOfMenu9, name);
+  filterForAllergy(sushiKushiMenuItems, nameOfMenu9, "sushiKushiInput", name);
+} else if (chosen == "The Wiener’s Circle") {
+  var nameOfMenu10 = wienersCircleMenu;
+  changeLabels(nameOfMenu10, name);
+  filterForAllergy(wienersCircleMenuItems, nameOfMenu10, "wienersCircleInput", name);
+} else if (chosen == "Pizzeria Portofino") {
+  var nameOfMenu11 = portofinoMenu;
+  changeLabels(nameOfMenu11, name);
+  filterForAllergy(portofinoMenuItems, nameOfMenu11, "portofinoInput", name);
+} else if (chosen == "Del Seoul") {
+  var nameOfMenu12 = delSeoulMenu;
+  changeLabels(nameOfMenu12, name);
+  filterForAllergy(delSeoulMenuItems, nameOfMenu12, "delSeoulInput", name);
+} else if (chosen == "Frances Brunchery") {
+  var nameOfMenu13 = francesMenu;
+  changeLabels(nameOfMenu13, name);
+  filterForAllergy(francesMenuItems, nameOfMenu13, "francesInput", name);
+} else if (chosen == "Brunch Cafe") {
+  var nameOfMenu14 = brunchCafeMenu;
+  changeLabels(nameOfMenu14, name);
+  filterForAllergy(brunchCafeMenuItems, nameOfMenu14, "brunchCafeInput", name);
+} else if (chosen == "Lolo’s Bowls") {
+  var nameOfMenu15 = loloMenu;
+  changeLabels(nameOfMenu15, name);
+  filterForAllergy(loloMenuItems, nameOfMenu15, "loloInput", name);
+} else if (chosen == "Summer House Santa Monica") {
+  var nameOfMenu16 = summerHouseMenu;
+  changeLabels(nameOfMenu16, name);
+  filterForAllergy(summerHouseMenuItems, nameOfMenu16, "summerHouseInput", name);
+} else {
+  console.log("No matching restaurant found.");
+}
+
+});
+
+// --- SURVEY SCREEN ---
+onEvent("chooseRestaurantButton", "click", function() {
+  console.log(allergenList);
+  console.log(fullAllergenList);
+  setScreen("chooseRestaurantScreen");
+  setText("allergensLabel", "Your allergens are: " + allergenList.join(", "));
+});
+
+// --- ALLERGEN BUTTONS ---
+onEvent("nutsButton", "click", function() {
+  chooseAllergen("nutsButton", "Nuts");
+  if (nutsCount%2==0) {
+    appendItem(fullAllergenList, "peanuts");
+    appendItem(fullAllergenList, "walnuts");
+    appendItem(fullAllergenList, "almonds");
+    appendItem(fullAllergenList, "pecans");
+    appendItem(fullAllergenList, "hazelnuts");
+    appendItem(fullAllergenList, "cashews");
+    appendItem(fullAllergenList, "pistachios");
+    appendItem(fullAllergenList, "pine nuts");
+    appendItem(fullAllergenList, "pesto");
+    appendItem(fullAllergenList, "trail mix");
+    appendItem(fullAllergenList, "granola");
+    appendItem(fullAllergenList, "peanut oil");
+    appendItem(fullAllergenList, "peanut butter");
+    appendItem(fullAllergenList, "coconut");
+    appendItem(fullAllergenList, "coconut oil");
+    appendItem(fullAllergenList, "almond butter");
+    appendItem(fullAllergenList, "almond oil");
+    appendItem(fullAllergenList, "nutella");
+  } else {
+    var index = fullAllergenList.indexOf("peanuts");
+    for (var i = 0; i < 18; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  nutsCount = nutsCount+1;
+});
+
+onEvent("dairyButton", "click", function() {
+  chooseAllergen("dairyButton", "Dairy");
+  if (dairyCount%2==0) {
+    dairy();
+  } else {
+    var index = fullAllergenList.indexOf("milk");
+    for (var i = 0; i < 10; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  dairyCount = dairyCount+1;
+});
+
+onEvent("glutenButton", "click", function() {
+  chooseAllergen("glutenButton", "Gluten");
+  if (glutenCount%2==0) {
+    appendItem(fullAllergenList, "bread");
+    appendItem(fullAllergenList, "bun");
+    appendItem(fullAllergenList, "flour");
+    appendItem(fullAllergenList, "dough");
+    appendItem(fullAllergenList, "cake");
+    appendItem(fullAllergenList, "pasta");
+    appendItem(fullAllergenList, "crackers");
+    appendItem(fullAllergenList, "soy sauce");
+    appendItem(fullAllergenList, "cereal");
+    appendItem(fullAllergenList, "wheat");
+    appendItem(fullAllergenList, "cookies");
+    appendItem(fullAllergenList, "granola");
+    appendItem(fullAllergenList, "beer");
+    appendItem(fullAllergenList, "tortilla");
+  } else {
+    var index = fullAllergenList.indexOf("bread");
+    for (var i = 0; i < 14; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  glutenCount = glutenCount+1;
+});
+
+onEvent("shellfishButton", "click", function() {
+  chooseAllergen("shellfishButton", "Shellfish");
+  if (shellfishCount%2==0) {
+    appendItem(fullAllergenList, "shrimp");
+    appendItem(fullAllergenList, "crab");
+    appendItem(fullAllergenList, "lobster");
+    appendItem(fullAllergenList, "prawn");
+    appendItem(fullAllergenList, "crawfish");
+    appendItem(fullAllergenList, "clam");
+    appendItem(fullAllergenList, "mussels");
+    appendItem(fullAllergenList, "oysters");
+    appendItem(fullAllergenList, "scallops");
+    appendItem(fullAllergenList, "crayfish");
+    appendItem(fullAllergenList, "octopus");
+    appendItem(fullAllergenList, "squid");
+    appendItem(fullAllergenList, "snail");
+  } else {
+    var index = fullAllergenList.indexOf("shrimp");
+    for (var i = 0; i < 13; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  shellfishCount = shellfishCount+1;
+});
+
+onEvent("sesameButton", "click", function() {
+  chooseAllergen("sesameButton", "Sesame");
+  if (sesameCount%2==0) {
+    appendItem(fullAllergenList, "sesame");
+    appendItem(fullAllergenList, "poppyseeds");
+    appendItem(fullAllergenList, "sunflower seeds");
+    appendItem(fullAllergenList, "mustard");
+    appendItem(fullAllergenList, "chia");
+    appendItem(fullAllergenList, "flax");
+    appendItem(fullAllergenList, "sesame oil");
+    appendItem(fullAllergenList, "tahini");
+    appendItem(fullAllergenList, "hummus");
+  } else {
+    var index = fullAllergenList.indexOf("sesame");
+    for (var i = 0; i < 9; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  sesameCount = sesameCount+1;
+});
+
+onEvent("eggsButton", "click", function() {
+  chooseAllergen("eggsButton", "Eggs");
+  if (eggsCount%2==0) {
+    appendItem(fullAllergenList, "eggs");
+  } else {
+    var index = fullAllergenList.indexOf("eggs");
+    for (var i = 0; i < 1; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  eggsCount = eggsCount+1;
+});
+
+onEvent("veganButton", "click", function() {
+  chooseAllergen("veganButton", "Vegan");
+  if (veganCount%2==0) {
+    dairy();
+    appendItem(fullAllergenList, "eggs");
+    meat();
+  } else {
+    var index = fullAllergenList.indexOf("milk");
+    for (var i = 0; i < 25; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  veganCount = veganCount+1;
+});
+
+onEvent("vegetarianButton", "click", function() {
+  chooseAllergen("vegetarianButton", "Vegetarian");
+  if (vegetarianCount%2==0) {
+    meat();
+  } else {
+    var index = fullAllergenList.indexOf("beef");
+    for (var i = 0; i < 14; i++) {
+     removeItem(fullAllergenList, index);
+    }
+  }
+  vegetarianCount = vegetarianCount+1;
+});
+
+onEvent("otherButton", "input", function() {
+  chooseAllergen("otherButton", getText("otherButton"));
+  var input = getText("otherButton");
+  otherOption(input, ",");
+  otherCount = eggsCount+1;
+});
+
+// --- LOGOUT & LOGIN ---
+onEvent("logOutButton", "click", function() {
+  currentUsername = " ";
+  hideElement("errorLabel");
+  setText("usernameInput", "");
+  setText("passwordInput", "");
+  setScreen("homeScreen");
+});
+
+onEvent("logInButton", "click", function() {
+  logIn(getText("usernameInput"), getText("passwordInput"));
+});
+
+onEvent("createAccountButton", "click", function() {
+  setScreen("signUpScreen");
+  hideElement("errorLabel");
+});
+
+onEvent("goLogInButton", "click", function() {
+  if (getText("passInputSU") == getText("confirmPasswordInputSU")) {
+    appendItem(usernameList, getText("usernameInputSU"));
+    appendItem(passList, getText("passInputSU"));
+    setScreen("homeScreen");
+    setText("usernameInputSU", "");
+    setText("passInputSU", "");
+    setText("confirmPasswordInputSU", "");
+  } else {
+    showElement("errorLabelSU");
+    setText("confirmPasswordInputSU", "");
+  }
+});
+
+// --- FUNCTIONS ---
+function logIn(username, password) {
+  for (var i = 0; i < usernameList.length; i++) {
+    if (usernameList[i] == username && passList[i] == password) {
+      setScreen("surveyScreen");
+      currentUsername = usernameList[i];
+      return;
+    }
+  }
+  setProperty("errorLabel", "text", "Wrong password or email\n\nDo you need to create an account?");
+  showElement("errorLabel");
+}
+
+function chooseAllergen(button, allergen) {
+  if (getProperty(button, "background-color") == "white") {
+    setProperty(button, "text-color", rgb(255, 63, 63, 0.55));
+    setProperty(button, "background-color", rgb(256, 256, 256, 0.55));
+    for (var i = 0; i < allergenList.length; i++) {
+      if (allergenList[i] == allergen) {
+        removeItem(allergenList, i);
+      }
+    }
+  } else {
+    setProperty(button, "background-color", "white");
+    setProperty(button, "text-color", rgb(255, 63, 63));
+    appendItem(allergenList, allergen);
+  }
+}
+
+function logOutFunction() {
+  allergenList = [];
+  fullAllergenList = [];
+  setScreen("homeScreen");
+  setText("usernameInput", "");
+  setText("passwordInput", "");
+  hideElement("errorLabel");
+  
+  var buttons = ["nutsButton","dairyButton","glutenButton","shellfishButton","sesameButton","eggsButton","veganButton","vegetarianButton"];
+  for (var i = 0; i < buttons.length; i++) {
+    setProperty(buttons[i], "text-color", rgb(255, 63, 63, 0.55));
+    setProperty(buttons[i], "background-color", rgb(256, 256, 256, 0.55));
+  }
+}
+
+function dairy() {
+  appendItem(fullAllergenList, "milk");
+  appendItem(fullAllergenList, "yogurt");
+  appendItem(fullAllergenList, "ice cream");
+  appendItem(fullAllergenList, "cheese");
+  appendItem(fullAllergenList, "chocolate");
+  appendItem(fullAllergenList, "butter");
+  appendItem(fullAllergenList, "sour cream");
+  appendItem(fullAllergenList, "ranch");
+  appendItem(fullAllergenList, "custard");
+  appendItem(fullAllergenList, "whipped cream");
+}
+
+function meat() {
+  appendItem(fullAllergenList, "beef");
+  appendItem(fullAllergenList, "chicken");
+  appendItem(fullAllergenList, "pork");
+  appendItem(fullAllergenList, "lamb");
+  appendItem(fullAllergenList, "turkey");
+  appendItem(fullAllergenList, "ham");
+  appendItem(fullAllergenList, "veal");
+  appendItem(fullAllergenList, "ribs");
+  appendItem(fullAllergenList, "venison");
+  appendItem(fullAllergenList, "goat");
+  appendItem(fullAllergenList, "fish");
+  appendItem(fullAllergenList, "beef tallow");
+  appendItem(fullAllergenList, "bacon");
+  appendItem(fullAllergenList, "sausage");
+}
+
+function otherOption(str, a) {
+  var word = str;
+  var index = 0;
+  var num = 1;
+  if (otherCount%2==0) {
+    while (word.length != 0 && num != 0) {
+      index = word.indexOf(a);
+      if (index == -1) {
+        appendItem(fullAllergenList, word.toLowerCase());
+        num = 0;
+      } else {
+        var subWord = word.substring(0, index);
+        appendItem(fullAllergenList, subWord.toLowerCase());
+        word = word.substring(index + 1, word.length);
+      }
+    }
+  } else {
+    var subWord1 = word.substring(0, index);
+    var newIndex = fullAllergenList.indexOf(subWord1);
+    for (var i = 0; i < 1; i++) {
+     removeItem(fullAllergenList, newIndex);
+    }
+  }
+}
+function filterForAllergy(whichList, menuName, inputName, name) {
+  for (var r = 0; r < whichList.length; r++) {
+    var ingredients = whichList[r];
+    if (!ingredients) continue;
+
+    for (var k = 0; k < fullAllergenList.length; k++) {
+      var allergy = fullAllergenList[k].toLowerCase();
+
+      for (var m = 0; m < ingredients.length; m++) {
+        if (ingredients[m]==allergy) {
+          setProperty((name+"Label") + r, "text-color", "red");
+          if (getText(inputName+r)=="")
+          {
+            setText(inputName+r, menuName[r] + " contains " + allergy);
+          }
+          else
+          {
+          setText(inputName+r, (getText(inputName+r))+", "+allergy);
+          }
+        }
+      }
+    }
+  }
+}
+function changeLabels(theMenu, name) {
+  for (var w = 0; w < theMenu.length; w++) {
+    setText((name+"Label") + w, theMenu[w]);
+    setProperty((name+"Label") + w, "text-color", "black");
+  }
+}
+function goHome() {
+  setScreen("chooseRestaurantScreen");
+}
+function addToFav(button, num) {
+  var contains = false;
+  var index = 0;
+  for (var i = 0; i < favList.length; i++) {
+    if (favList[i]==getText(button+"Label"+num)) {
+      contains = true;
+      index = i;
+    }
+  }
+  if (getChecked((button+"Button")+num)&&contains!=true) {
+    appendItem(favList, (getText(button+"Label"+num))+"-"+button);
+  } else if (getChecked((button+"Button")+num)!=true&&contains) {
+    removeItem(favList, index);
+  }
+}
+
+
