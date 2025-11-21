@@ -1,4 +1,4 @@
-# OMallerG
+# O-M-allerG
 Hi! We are Eva Cytron and Olivia Shniderman, creators of OMallerG. We built this app to help people with allergies and dietary restrictions quickly find safe foods at IL District 10 restaurants.
 
 OMallerG stores user login information and allergens in arrays at matching indices. This lets the app easily compare a user’s allergens to the ingredients in each menu item and flag unsafe foods. Any unsafe items appear in red with a brief explanation. Users can also favorite safe items to view later on the Safe Foods screen.
